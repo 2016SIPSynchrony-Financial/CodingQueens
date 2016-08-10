@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>My List</title>
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://www.w3schools.club/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+@font-face {
+    font-family: myFirstFont2;
+    src: url(basic_title_font.woff);
+	}
+	div {
+    font-family: myFirstFont2;
+	}  
+  .jumbotron {
+      background-color: gray;
+      color: #44F72D;
+      padding: 50px 50px;
+      font-family: Montserrat, sans-serif;
+  }
+  @font-face {
+    font-family: myFirstFont;
+    src: url(code-bold.woff);
+	}
+
+	div {
+    font-family: myFirstFont;
+	}
+  .container-fluid {
+      padding: 0px 0px;
+  }
+  .container-fluid_2{
+	  paddng: 5px 10px;
+	  background-color:#000000
+  }
+  .bg-grey {
+      background-color: #000000;
+  }
+  .panel {
+      border: 1px solid #000000;
+      border-radius:0 !important;
+      transition: box-shadow 0.5s;
+  }
+     .panel:hover {
+      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+  }
+  .panel-footer .btn:hover {
+      border: 1px solid #000000;
+      background-color: #000000 !important;
+      color: #000000;
+  }
+  .panel-footer {
+      background-color: white !important;
+  }
+  .panel-footer h3 {
+      font-size: 32px;
+  }
+  .panel-footer h4 {
+      color: #44F72D;
+      font-size: 14px;
+  }
+  .panel-footer .btn {
+      margin: 15px 0;
+      background-color: #000000;
+      color: #44F72D;
+  }
+  .navbar {
+      margin-bottom: 0;
+      background-color: #2f2f2f;
+      z-index: 9999;
+      border: 0;
+	  height:50px;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
+      font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+      color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+      color: #fff !important;
+      background-color: #2f2f2f !important;
+  }
+  .navbar-default .navbar-toggle {
+      border-color: transparent;
+      color: #2f2f2f !important;
+  }
+   footer .glyphicon {
+      font-size: 20px;
+      margin-bottom: 2px;
+      color: #44F72D;
+  }
+  }
+</style>
+<body class="w3-white">
+<nav class="navbar navbar-default">
+<!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+	  <a class="navbar-brand" href="firsthomepage.html">INTER</a>
+        <li><a href="#">Find the Perfect Fit!</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup= true" aria-expanded="false">My Tools <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Homework Breakup</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Food Finder</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+		 <button type="submit" class="btn btn-default">Search</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="aboutuspage.html"><span class="glyphicon glyphicon-user"></span> About us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav> 
+<div class="jumbotron text-center w3-black">
+  <h1 style="font-size:100px; color:white;">INTER</h1>
+    <img src="break.jpg" class="img-circle" style="width: 500px; height: 300px" alt="Logo">
+  </div>
+  <div class="w3-row w3-padding-32 text-center">
+      <div class="w3-half">
+        <h3 style="text-center">Food Break!</h3>
+        <img src="food.jpg" class="w3-round w3-margin-bottom" alt="Gretchen Farmer" style="width:350px; heigth:350px">
+      </div>
+      <div class="w3-half">
+        <h3>Homework Break!</h3>
+        <img src="mood.png" class="w3-round w3-margin-bottom" alt="Isabel Maymur" style="width:550px; height:350px">
+      </div>
+
+ <span><button type="button" onclick="myFunction_2()" class="btn btn-success" style="height:75px; width:650px; font-size:30px">
+ Hungry? <i class="fa fa-cutlery"></i> 
+</button>
+	<button type="button" onclick="myFunction()" class="btn btn-success" style="height:75px; width:650px; font-size:30px">
+ Mood? <i class="fa fa-smile-o"></i> 
+</button></span>
+<br></br>
+<br></br>
+<div id="Food" class="w3-row-padding w3-half w3-hide w3-margin-bottom">
+    <div class="w3-third text-center">
+      <div class="w3-container  w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-fast-forward w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="#"><h4 style="color:white;">Quick?</h4></a>
+      </div>
+    </div>
+	  <div class="w3-third text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-usd w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="#"><h4 style="color:white;">Cheap?</h4></a>
+      </div>
+    </div> 
+	<div class="w3-third text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-smile-o w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="#"><h4 style="color:white;">Healthy?</h4></a>
+      </div>
+    </div> 
+  </div>
+<div id="Emotion" class="w3-row-padding w3-half w3-hide w3-margin-bottom">
+    <div class="w3-quarter text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-frown-o w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="#"><h4 style="color:white;">Frustated?</h4></a>
+      </div>
+    </div>
+	  <div class="w3-quarter text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-meh-o w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="#"><h4 style="color:white;">Tired?</h4></a>
+      </div>
+    </div> 
+	<div class="w3-quarter text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-smile-o w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="#"><h4 style="color:white;">Active?</h4></a>
+      </div>
+    </div> 
+	<div class="w3-quarter text-center">
+      <div class="w3-container w3-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-frown-o w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <a href="#"><h4 style="color:white;">Angry?</h4></a>
+      </div>
+    </div>
+  </div>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("Emotion");
+    if (x.className.indexOf("w3-show-block") == -1) {
+        x.className += " w3-show-block";
+    } else {
+        x.className = x.className.replace(" w3-show-block", "");
+    }
+}
+function myFunction_2() {
+    var x = document.getElementById("Food");
+    if (x.className.indexOf("w3-show-block") == -1) {
+        x.className += " w3-show-block";
+    } else {
+        x.className = x.className.replace(" w3-show-block", "");
+    }
+}
+</script>
+<script>
+// Get the Sidenav
+var mySidenav = document.getElementById("mySidenav");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidenav, and add overlay effect
+function w3_open() {
+    if (mySidenav.style.display === 'block') {
+        mySidenav.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidenav.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidenav with the close button
+function w3_close() {
+    mySidenav.style.display = "none";
+    overlayBg.style.display = "none";
+}
+</script>
+
+ </body>
+</html>
