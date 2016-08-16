@@ -9,7 +9,65 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<style>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript"> 
+    google.load('visualization', '1',
+                {'packages':['corechart', 'table']}
+                ); 
+</script>
+<script type="text/javascript">
+	function search(){
+		var search_text= document.getElementById("college").value;
+	
+		function runQuery(){
+			var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/16gslxlvgashLqKeRyrJaowasgv3CIAbSgLK5Q1TSHVQ/edit#gid=0');
+			 query.setQuery("select A, B, C, D, E, F, G, H, I, J where LOWER(A) contains LOWER('"+ search_text + "')");
+			 var data_string =  query.send(handleQueryResponse);
+		};
+		// A callback function that runs when data source responds
+		// Take an object of type QueryResponse
+		function handleQueryResponse(response){
+			if (response.isError()) {
+				alert(response);
+				window.alert("Error accessing the database.")
+			}
+			else {                   
+				data = response.getDataTable().toJSON();
+				var college_search = document.getElementById("college_search");
+				var obj = JSON.parse(data);
+				if (obj.rows.length ==0) { //because google api does not seem to throwing errors as expected :/
+					college_search.innerHTML = "No matches found.";
+				}
+				else {
+						college_search.innerHTML = "";
+						var table = document.createElement('table');
+						table.setAttribute('border',null);
+						table.setAttribute('width','100%');
+						for(var i=0; i<obj.rows.length; i++)
+						{
+							var row = table.insertRow(i);
+							var a = document.createElement('a');
+							var text = document.createTextNode(obj.rows[i].c[0].v);
+							var cell = row.insertCell(0);
+									
+							a.appendChild(text);
+							a.href = obj.rows[i].c[9].v;
+							cell.setAttribute('align','center')
+							cell.appendChild(a);
+						
+							text = document.createTextNode(obj.rows[i].c[4].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+						}
+						college_search.appendChild(table);
+				};
+			};
+		}
+		runQuery();
+	}            
+</script>
+  <style>
 .container3 {
     position: relative;
 }
@@ -125,16 +183,17 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 	  <a class="navbar-brand" href="firsthomepage.html">INTER</a>
-        <li><a href="demo.html">My List</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup= true" aria-expanded="false">My Tools <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Homework Breakup</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Food Finder</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+		 <li><a href="samplefinder.html">College Fit Finder</a></li>
+   <li><a href="toolspage_orig.html">My Tools</a></li>
+      <li><a href="searchy.html">Narrow Search</a></li>
           </ul>
-        </li>
-      </ul>
+	  <form id='search_box' class="navbar-form navbar-left">
+        <div class="form-group text-center">
+          <input type="text" id="college" class="form-control" placeholder="Search by College Name">
+		 <button type="button" onclick="search()" class="btn btn-default">Search</button>
+        </div>
+      </form>
       <ul class="nav navbar-nav navbar-right">
        <li><a href="aboutuspage.html"><span class="glyphicon glyphicon-user"></span> About us</a></li>
           </ul>
@@ -144,15 +203,16 @@
   </div><!-- /.container-fluid -->
 </nav>
 <div class="jumbotron text-center w3-grey">
-  <h1>INTER</h1>
+	  	<div id="college_search" style="font-size:20px"></div>
+  <h1>Welcome back!</h1>
   <div class="container3">
   <img src="logo.jpeg" class="img-rounded" style="width: 700px; height: 375px; opacity: 0.9" alt="Logo">
-  <div class="center2"><a href="#" style="color:white;">MY TOOLS<a/></div>
-  <div class="center"><a href="#" style="color:white;">SEARCH</a></div>
-  <div class="center3"><a href="dashboard.html" style="color: white;">MY LIST</a></div>
+<div class="center"><a href="dum.html" style="color:white;">MY LIST</a></div>
+<div class="center2"><a href="searchy.html" style="color:white;">SEARCH</a></div>
+<div class="center3"><a href="toolspage_orig.html" style="color:white;">MY TOOLS</a></div>
 </div>
 <p></p>
-<button type="submit" class="btn btn-success" style="height:75px; width:700px; font-size:30px">
+<button type="submit" onClick="location.href='samplefinder.html'" class="btn btn-success" style="height:75px; width:700px; font-size:30px">
  Find a College Now <i class="glyphicon glyphicon-arrow-right"></i> 
 </button>
 
@@ -163,7 +223,7 @@
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span></a>
 	<p></p>
-   <a href="#" class="w3-hover-text-green"><i class="fa fa-facebook-official"></i></a>
+   <a href="https://www.facebook.com/INTERgwc/" class="w3-hover-text-green"><i class="fa fa-facebook-official"></i></a>
    <a href="https://twitter.com/INTERgwc" class="w3-hover-text-green"><i class="fa fa-twitter"></i></a>
       <a href="https://www.instagram.com/intergwc/" class="w3-hover-text-greend"><i class="fa fa-instagram"></i></a>
    <p style="color:green;">Coding Queens inc.</p>

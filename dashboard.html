@@ -1,16 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>My List</title>
- <meta charset="utf-8">
+<head>
+  <title>INTER</title>
+  <meta charset="utf-8">
+   <meta content='IE=edge' http-equiv='X-UA-Compatible'>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://www.w3schools.club/lib/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
+  <link rel="stylesheet" href="http://www.w3schools.club/lib/w3.css">
+ <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript"> 
+    google.load('visualization', '1',
+                {'packages':['corechart', 'table']}
+                ); 
+</script>
+<script type="text/javascript">
+	function search(){
+		var search_text= document.getElementById("college").value;
+	
+		function runQuery(){
+			var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/16gslxlvgashLqKeRyrJaowasgv3CIAbSgLK5Q1TSHVQ/edit#gid=0');
+			 query.setQuery("select A, B, C, D, E, F, G, H, I, J where LOWER(A) contains LOWER('"+ search_text + "')");
+			 var data_string =  query.send(handleQueryResponse);
+		};
+		// A callback function that runs when data source responds
+		// Take an object of type QueryResponse
+		function handleQueryResponse(response){
+			if (response.isError()) {
+				alert(response);
+				window.alert("Error accessing the database.")
+			}
+			else {                   
+				data = response.getDataTable().toJSON();
+				var college_search = document.getElementById("college_search");
+				var obj = JSON.parse(data);
+				if (obj.rows.length ==0) { //because google api does not seem to throwing errors as expected :/
+					college_search.innerHTML = "No matches found.";
+				}
+				else {
+						college_search.innerHTML = "";
+						var table = document.createElement('table');
+						table.setAttribute('border',null);
+						table.setAttribute('width','100%');
+						for(var i=0; i<obj.rows.length; i++)
+						{
+							var row = table.insertRow(i);
+							var a = document.createElement('a');
+							var text = document.createTextNode(obj.rows[i].c[0].v);
+							var cell = row.insertCell(0);
+									
+							a.appendChild(text);
+							a.href = obj.rows[i].c[9].v;
+							cell.setAttribute('align','center')
+							cell.appendChild(a);
+						
+							text = document.createTextNode(obj.rows[i].c[4].v);
+							cell = row.insertCell(1);
+							cell.setAttribute('align','center')
+							cell.appendChild(text);
+						}
+						college_search.appendChild(table);
+				};
+			};
+		}
+		runQuery();
+	}            
+</script>
+
+ <script>
+var myApp = angular.module('ui.bootstrap.demo', ['ui.bootstrap']);
+ 
+
+function myCtrl($scope){
+$scope.MakeVisible=!$scope.MakeVisible; 
+$scope.showAddNoteBtn=true;	
+$scope.userText=[];
+$scope.Test='';
+$scope.MakeVisible=false;
+
+  $scope.addNoteBtnClicked=function(){
+	$scope.Test='';
+	$scope.MakeVisible= true;
+	$scope.showAddNoteBtn=false;
+}
+  
+  $scope.cancel=function(){
+	$scope.MakeVisible=false;
+	$scope.showAddNoteBtn=true;
+}
+
+  $scope.Submit=function(){	
+	$scope.userText.push($scope.Test);
+	$scope.MakeVisible=false;
+	$scope.showAddNoteBtn=true;
+}
+
+
+
+}
+</script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 @font-face {
@@ -107,22 +198,20 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-	  <a class="navbar-brand" href="firsthomepage.html">INTER</a>
-        <li><a href="#">Find the Perfect Fit!</a></li>
+	  <a class="navbar-brand" href="user.html">INTER</a>
+        <li><a href="samplefinder.html">Find the Perfect Fit!</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup= true" aria-expanded="false">My Tools <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Homework Breakup</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Food Finder</a></li>
+  <li><a href="dum.html">MY LIST</a></li>
+   <li><a href="toolspage_orig.html">MY TOOLS</a></li>
+   <li><a href="searchy.html">Narrow Search</a></li>
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+      <form id='search_box' class="navbar-form navbar-left">
+        <div class="form-group text-center">
+          <input type="text" id="college" class="form-control" placeholder="Search by College Name">
+		 <button type="button" onclick="search()" class="btn btn-default">Search</button>
         </div>
-		 <button type="submit" class="btn btn-default">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
        <li><a href="aboutuspage.html"><span class="glyphicon glyphicon-user"></span> About us</a></li>
@@ -136,11 +225,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <nav class="w3-sidenav w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidenav"><br>
   <div class="w3-container w3-row">
   <div class="w3-col s8">
-      <h6>We missed you, <strong>Melissa!</strong></h6>
+      <h6>We missed you, <strong>Guest!</strong></h6>
     </div>
 	<br></br>
     <div class="w3-col s4 w3-margin-center">
-      <img src="mel.jpg" class="w3-rounded" style="width:100px">
+      <img src="person.png" class="w3-rounded" style="width:100px">
     </div>
     
   </div>
@@ -165,6 +254,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
+  	  	<div id="college_search" style="font-size:20px"></div>
     <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
   </header>
 
@@ -303,7 +393,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </div>
   <hr>
 
-  <div class="w3-container">
+	<div ng-app="ui.bootstrap.demo">
+<div ng-controller="myCtrl">
+<!-- actual comment here in h5  -->
+<div class="w3-container">
     <h5>Recent Comments on Tulane University</h5>
     <div class="w3-row">
       <div class="w3-col m2 text-center">
@@ -325,8 +418,36 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <p>The cafeteria food could be better but hey! My roommate is supercool!</p><br>
       </div>
     </div>
+	<br></br>
+    <div class="w3-row">
+      <div class="w3-col m2 text-center">
+        <img class="w3-rounded" src="person.png" style="width:96px;height:96px">
+      </div>
+      <div class="w3-col m10 w3-container">
+        <h4>Guest<span class="w3-opacity w3-medium">  Aug 18, 2016, 10:17am</span></h4>
+		<p ng-repeat="t in userText">{{t}}</p>
+		<div ng-hide="MakeVisible">
+		</div>
+
+		<div>
+<input ng-show='showAddNoteBtn' type="button" value="Comment?" ng-click="addNoteBtnClicked()"/>
+</div>	
+		<div ng-show="MakeVisible">
+       <textarea ng-model="Test"></textarea>
+	   <input  type="button" value= "Submit" ng-click="Submit()"/>
+	    <input  type="button" value="Cancel" ng-click="cancel()"/>
+      </div>
+    </div>
+	</div>
+	<br></br>
+	<p></p>
   </div>
-  <br>
+  </div>
+  <div ng-hide="MakeVisible">
+  </div>
+  <div ng-show="MakeVisible">
+								
+</div>
   <!-- Footer -->
 <footer class="container-fluid_2 text-center">
   <a href="#myPage" title="To Top">
